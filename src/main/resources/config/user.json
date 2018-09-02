@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "userGroup": 1,
+    "username": "asmelik",
+    "rawPassword": "admin4321"
+  },
+  {
+    "id": 2,
+    "userGroup": 1,
+    "username": "vskvortsov",
+    "rawPassword": "5946"
+  },
+  {
+    "id": 3,
+    "userGroup": 1,
+    "username": "mzaytsev",
+    "rawPassword": "7283"
+  }
+]

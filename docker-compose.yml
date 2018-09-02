@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+
+  pfpay-storage:
+    image: ${PFPAY_STORAGE_IMAGE}
+    container_name: ${PFPAY_STORAGE_CONTAINER}
+    restart: always
+    environment:
+      - POSTGRES_DB=pfpay
+      - POSTGRES_USER=pfpay_user
+      - POSTGRES_PASSWORD=pfpay_password
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /opt/pfpay/${PFPAY_FOLDER}/storage:/var/lib/postgresql/data
+
+  pfpay-server:
+    image: ${PFPAY_SERVER_IMAGE}
+    container_name: ${PFPAY_SERVER_CONTAINER}
+    restart: always
+    depends_on:
+      - pfpay-storage
+    environment:
+      - PFPAY_HOST=${PFPAY_HOST}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /opt/pfpay/${PFPAY_FOLDER}/config:/pfpay/config
+      - /opt/pfpay/${PFPAY_FOLDER}/logs:/pfpay/logs
+      - /opt/pfpay/${PFPAY_FOLDER}/export:/pfpay/export
+    networks:
+      - default
+      - pfpay
+
+networks:
+  ubilling:
+    external:
+      name: pfpay_default

@@ -1,0 +1,51 @@
+variables:
+  JAVA_IMAGE: java:8
+  DOCKER_IMAGE: docker:18.03.0-ce
+
+stages:
+  - build_application
+  - create_image
+
+before_script:
+  - export DOCKER_REGISTRY=ci.software-com.ru:5000
+  - export DOCKER_REGISTRY_USER=gitlab
+  - export DOCKER_REGISTRY_PASSWORD=Twynd1flatpiOv!
+
+  - export PFPAY_SERVER_PROJECT=pf/pfpay-server
+  - export PFPAY_VERSION=$CI_COMMIT_REF_SLUG
+  - export PFPAY_SERVER_IMAGE=$DOCKER_REGISTRY/$PFPAY_SERVER_PROJECT:$PFPAY_VERSION
+
+  - export GRADLE_USER_HOME=`pwd`/.gradle
+
+build_application:
+  stage: build_application
+  image: $JAVA_IMAGE
+  cache:
+    paths:
+      - .gradle/wrapper
+      - .gradle/caches
+
+  script:
+    - export
+    - ./gradlew clean build
+
+  artifacts:
+    expire_in: 30 min
+    paths:
+      - build
+
+create_image:
+  stage: create_image
+  image: $DOCKER_IMAGE
+
+  script:
+    - export
+
+    - docker build --tag $PFPAY_SERVER_IMAGE .
+    - docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD $DOCKER_REGISTRY
+    - docker push $PFPAY_SERVER_IMAGE
+
+  only:
+    - master
+    - /^release*/
+

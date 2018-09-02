@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "person": 1,
+    "organization": 1,
+    "contractNumber": "Контракт 1",
+    "contractDate": "2017-01-01",
+    "contractStatus": 2,
+    "contractBalance": 1000
+  },
+  {
+    "id": 2,
+    "person": 2,
+    "organization": 1,
+    "contractNumber": "Контракт 2",
+    "contractDate": "2017-01-01",
+    "contractStatus": 2,
+    "contractBalance": 2000
+  },
+  {
+    "id": 3,
+    "person": 3,
+    "organization": 1,
+    "contractNumber": "Контракт 3",
+    "contractDate": "2017-01-01",
+    "contractStatus": 2,
+    "contractBalance": 3000
+  }
+]

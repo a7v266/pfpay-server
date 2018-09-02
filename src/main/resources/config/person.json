@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "firstName": "Иван",
+    "secondName": "Иванович",
+    "lastName": "Иванов",
+    "snils": "12345678901"
+  },
+  {
+    "id": 2,
+    "firstName": "Федор",
+    "secondName": "Федорович",
+    "lastName": "Федоров",
+    "snils": "12345678902"
+  },
+  {
+    "id": 3,
+    "firstName": "Петр",
+    "secondName": "Петрович",
+    "lastName": "Петров",
+    "snils": "12345678903"
+  }
+]
